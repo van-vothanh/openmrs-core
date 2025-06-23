@@ -9,6 +9,8 @@
  */
 package org.openmrs.api;
 
+import java.io.Serial;
+
 /**
  * This exception is thrown when a user tries manipulate of a person attribute type while person attribute types are locked
  * 
@@ -16,7 +18,8 @@ package org.openmrs.api;
  * @see PersonService#checkIfPersonAttributeTypesAreLocked() 
  */
 public class PersonAttributeTypeLockedException extends APIException {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	/**

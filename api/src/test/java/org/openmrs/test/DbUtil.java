@@ -78,7 +78,7 @@ public class DbUtil {
 		
 		String url = System.getProperty("databaseUrl");
 		if (StringUtils.isBlank(url)) {
-			url = String.format(getConnectionUrl(), databaseName);
+			url = getConnectionUrl().formatted(databaseName);
 		}
 		
 		System.setProperty("databaseUrl", url);

@@ -29,7 +29,6 @@ import java.nio.charset.Charset;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -97,7 +96,7 @@ class StorageServiceTest extends BaseContextSensitiveTest {
 	void getDataShouldReturnDataWhenLegacyFileExists() throws IOException {
 		Path legacyPath = null;
 		try {
-			Path dir = Files.createDirectories(Paths.get(OpenmrsUtil.getApplicationDataDirectory(), "storage"));
+			Path dir = Files.createDirectories(Path.of(OpenmrsUtil.getApplicationDataDirectory(), "storage"));
 			legacyPath = Files.createFile(dir.resolve(RandomStringUtils.insecure().nextAlphanumeric(8)));
 
 			try (OutputStream out = Files.newOutputStream(legacyPath)) {
@@ -607,7 +606,7 @@ class StorageServiceTest extends BaseContextSensitiveTest {
 		});
 		assertThat(e.getMessage(), is("Key must not point outside storage dir. Wrong key: /test"));
 
-		Path testFile = Paths.get(OpenmrsUtil.getApplicationDataDirectory(), "../test");
+		Path testFile = Path.of(OpenmrsUtil.getApplicationDataDirectory(), "../test");
 		try {
 			testFile.toFile().createNewFile();
 			IllegalArgumentException e2 = assertThrows(IllegalArgumentException.class, () -> {

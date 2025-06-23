@@ -9,6 +9,7 @@
  */
 package org.openmrs.api.db.hibernate;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
@@ -42,7 +43,8 @@ import org.slf4j.LoggerFactory;
 public class AuditableInterceptor extends EmptyInterceptor {
 	
 	private static final Logger log = LoggerFactory.getLogger(AuditableInterceptor.class);
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	/**
@@ -183,12 +185,10 @@ public class AuditableInterceptor extends EmptyInterceptor {
 	}
 	
 	private void handleCollectionChange(Object collection) {
-		if (collection instanceof PersistentSet) {
-			PersistentSet persistentCollection = (PersistentSet) collection; 
+		if (collection instanceof PersistentSet persistentCollection) { 
 			if ("org.openmrs.User.roles".equals(persistentCollection.getRole())) {
 				Object owner = persistentCollection.getOwner();
-				if (owner instanceof User) {
-					User user = (User) owner;
+				if (owner instanceof User user) {
 					if (user.getCreator() != null) {
 						user.setChangedBy(Context.getAuthenticatedUser());
 						user.setDateChanged(new Date());

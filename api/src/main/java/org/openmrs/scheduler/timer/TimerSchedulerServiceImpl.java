@@ -477,8 +477,7 @@ public class TimerSchedulerServiceImpl extends BaseOpenmrsService implements Sch
 	@SuppressWarnings("unchecked")
 	public void restoreFromMemento(OpenmrsMemento memento) {
 		
-		if (memento != null && memento instanceof TimerSchedulerMemento) {
-			TimerSchedulerMemento timerMemento = (TimerSchedulerMemento) memento;
+		if (memento != null && memento instanceof TimerSchedulerMemento timerMemento) {
 			
 			Set<Integer> taskIds = (HashSet<Integer>) timerMemento.getState();
 			

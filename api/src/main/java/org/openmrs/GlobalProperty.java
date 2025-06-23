@@ -10,6 +10,8 @@
 package org.openmrs;
 
 import javax.persistence.Cacheable;
+
+import java.io.Serial;
 import java.util.Date;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -29,7 +31,8 @@ import org.openmrs.customdatatype.SingleCustomValue;
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class GlobalProperty extends BaseOpenmrsObject implements CustomValueDescriptor, SingleCustomValue<GlobalProperty> {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private String property = "";
