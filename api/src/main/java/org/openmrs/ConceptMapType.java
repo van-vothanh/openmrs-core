@@ -19,6 +19,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import java.io.Serial;
+
 /**
  * ConceptMapType are used to define relationships between concepts and concept reference terms e.g
  * IS_A or SAME_AS, BROADER_THAN
@@ -30,6 +32,7 @@ import javax.persistence.Table;
 @Audited
 public class ConceptMapType extends BaseChangeableOpenmrsMetadata {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@Id

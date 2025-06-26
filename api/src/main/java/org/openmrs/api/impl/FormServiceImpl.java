@@ -558,8 +558,7 @@ public class FormServiceImpl extends BaseOpenmrsService implements FormService {
 		Concept concept = tmpFormField.getField().getConcept();
 		if (concept != null && concept.isComplex()) {
 			ComplexObsHandler handler = Context.getObsService().getHandler(((ConceptComplex) concept).getHandler());
-			if (handler instanceof SerializableComplexObsHandler) {
-				SerializableComplexObsHandler sHandler = (SerializableComplexObsHandler) handler;
+			if (handler instanceof SerializableComplexObsHandler sHandler) {
 				if (sHandler.getFormFields() != null) {
 					for (FormField ff : sHandler.getFormFields()) {
 						ff.setParent(tmpFormField);

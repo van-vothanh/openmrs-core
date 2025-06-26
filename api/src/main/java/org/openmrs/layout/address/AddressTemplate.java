@@ -9,6 +9,7 @@
  */
 package org.openmrs.layout.address;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import org.openmrs.layout.LayoutSupport;
@@ -18,7 +19,8 @@ import org.openmrs.layout.LayoutTemplate;
  * @since 1.12
  */
 public class AddressTemplate extends LayoutTemplate implements Serializable {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	public AddressTemplate(String string) {

@@ -9,6 +9,7 @@
  */
 package org.openmrs;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -25,7 +26,8 @@ import org.openmrs.util.NaturalStrings;
  */
 @Audited
 public class ProgramWorkflow extends BaseChangeableOpenmrsMetadata {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	// ******************

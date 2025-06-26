@@ -9,6 +9,8 @@
  */
 package org.openmrs.module;
 
+import java.io.Serial;
+
 import org.openmrs.api.context.Context;
 
 /**
@@ -21,7 +23,8 @@ import org.openmrs.api.context.Context;
  * @see MandatoryModuleException
  */
 public abstract class ModuleMustStartException extends RuntimeException {
-	
+
+	@Serial
 	private static final long serialVersionUID = -527601349350158268L;
 	
 	public ModuleMustStartException(String msg) {

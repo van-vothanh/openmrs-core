@@ -9,13 +9,15 @@
  */
 package org.openmrs.logic.result;
 
+import java.io.Serial;
 import java.util.Collection;
 
 /**
  *
  */
 public class EmptyResult extends Result {
-	
+
+	@Serial
 	private static final long serialVersionUID = 6317773013593085780L;
 	
 	/**
