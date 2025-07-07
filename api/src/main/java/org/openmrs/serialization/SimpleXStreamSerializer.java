@@ -78,6 +78,7 @@ public class SimpleXStreamSerializer implements OpenmrsSerializer {
 	 * @param customXStream
 	 * @throws SerializationException
 	 */
+	@Deprecated
 	public SimpleXStreamSerializer(XStream customXStream) throws SerializationException {
 		this(customXStream, null);
 	}

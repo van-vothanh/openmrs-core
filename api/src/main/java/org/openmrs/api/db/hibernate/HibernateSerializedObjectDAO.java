@@ -221,8 +221,7 @@ public class HibernateSerializedObjectDAO implements SerializedObjectDAO {
 			serializer = getSerializer(serializedObject);
 		}
 		
-		if (object instanceof Auditable) {
-			Auditable auditableObj = (Auditable) object;
+		if (object instanceof Auditable auditableObj) {
 			if (auditableObj.getCreator() == null) {
 				auditableObj.setCreator(Context.getAuthenticatedUser());
 			}
@@ -250,8 +249,7 @@ public class HibernateSerializedObjectDAO implements SerializedObjectDAO {
 		serializedObject.setSerializationClass(serializer.getClass());
 		serializedObject.setSerializedData(data);
 		
-		if (object instanceof OpenmrsMetadata) {
-			OpenmrsMetadata metaObj = (OpenmrsMetadata) object;
+		if (object instanceof OpenmrsMetadata metaObj) {
 			serializedObject.setName(metaObj.getName());
 			serializedObject.setDescription(metaObj.getDescription());
 			serializedObject.setRetired(metaObj.getRetired());
@@ -260,8 +258,7 @@ public class HibernateSerializedObjectDAO implements SerializedObjectDAO {
 			serializedObject.setRetireReason(metaObj.getRetireReason());
 		}
 		
-		if (object instanceof OpenmrsData) {
-			OpenmrsData dataObj = (OpenmrsData) object;
+		if (object instanceof OpenmrsData dataObj) {
 			serializedObject.setRetired(dataObj.getVoided());
 			serializedObject.setRetiredBy(dataObj.getVoidedBy());
 			serializedObject.setDateRetired(dataObj.getDateVoided());

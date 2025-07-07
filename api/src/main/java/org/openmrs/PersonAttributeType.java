@@ -17,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Comparator;
 
@@ -202,6 +204,7 @@ public class PersonAttributeType extends BaseChangeableOpenmrsMetadata implement
 	* @deprecated since 1.12. Use DefaultComparator instead.
 	* Note: this comparator imposes orderings that are inconsistent with equals.
 	*/
+	@Deprecated
 	@Override
 	@SuppressWarnings("squid:S1210")
 	public int compareTo(PersonAttributeType other) {
@@ -215,6 +218,7 @@ public class PersonAttributeType extends BaseChangeableOpenmrsMetadata implement
 	 **/
 	public static class DefaultComparator implements Comparator<PersonAttributeType>, Serializable {
 
+		@Serial
 		private static final long serialVersionUID = 1L;
 		
 		@Override

@@ -12,11 +12,12 @@ package org.openmrs.util;
 import org.openmrs.api.APIException;
 
 /**
- * Helper class created only to call some protected methods on the SecurityManager class.
- *
- * @see SecurityManager
+ * Helper class to get caller class information from the execution stack.
+ * This replaces the deprecated SecurityManager approach with the modern StackWalker API.
  */
-public class OpenmrsSecurityManager extends SecurityManager {
+public class OpenmrsSecurityManager {
+	
+	private static final StackWalker STACK_WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 	
 	/**
 	 * Returns the class on the current execution stack at the given depth. 0 is the most recently
@@ -25,7 +26,6 @@ public class OpenmrsSecurityManager extends SecurityManager {
 	 * @param callStackDepth
 	 * @return the most recently called class.
 	 * @throws APIException if given a callStackDepth less than zero
-	 * @see SecurityManager#getClassContext()
 	 * <strong>Should</strong> get the most recently called method
 	 * <strong>Should</strong> throw an error if given a subzero call stack level
 	 */
@@ -34,19 +34,15 @@ public class OpenmrsSecurityManager extends SecurityManager {
 			throw new APIException("call.stack.depth.error", (Object[]) null);
 		}
 		
-		//SecurityManager may appear more than once in classContext
-		int skipClasses = 1;
-		Class<?>[] classContext = getClassContext();
-		for (Class<?> clazz : classContext) {
-			if (SecurityManager.class.isAssignableFrom(clazz)) {
-				skipClasses++;
-			} else {
-				break;
-			}
-		}
-		
-		//Adjust the depth so that "0" is the not this "getCallerClass" method
-		return getClassContext()[callStackDepth + skipClasses];
+		// Use StackWalker to get the caller class
+		// Skip this method (getCallerClass) and return the class at the requested depth
+		return STACK_WALKER.walk(stream -> 
+			stream.skip(1) // Skip this getCallerClass method
+				  .skip(callStackDepth) // Skip to the requested depth
+				  .findFirst()
+				  .map(StackWalker.StackFrame::getDeclaringClass)
+				  .orElseThrow(() -> new APIException("call.stack.depth.error", (Object[]) null))
+		);
 	}
 	
 }
