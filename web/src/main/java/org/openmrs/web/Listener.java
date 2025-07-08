@@ -59,7 +59,7 @@ import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.util.ArrayList;
@@ -275,7 +275,7 @@ public final class Listener extends ContextLoader implements ServletContextListe
 		}
 		else {
 			String fileName = servletContext.getRealPath("/WEB-INF/csrfguard.properties");
-			try (InputStream csrfGuardInputStream = Files.newInputStream(Paths.get(fileName))) {
+			try (InputStream csrfGuardInputStream = Files.newInputStream(Path.of(fileName))) {
 				csrfGuardProperties.load(csrfGuardInputStream);
 			}
 			catch (Exception e) {
@@ -395,7 +395,7 @@ public final class Listener extends ContextLoader implements ServletContextListe
 			OpenmrsUtil.setApplicationDataDirectory(appDataDir);
 		} else if (!"openmrs".equalsIgnoreCase(WebConstants.WEBAPP_NAME)) {
 			OpenmrsUtil.setApplicationDataDirectory(
-			    Paths.get(OpenmrsUtil.getApplicationDataDirectory(), WebConstants.WEBAPP_NAME).toString());
+			    Path.of(OpenmrsUtil.getApplicationDataDirectory(), WebConstants.WEBAPP_NAME).toString());
 		}
 	}
 	
@@ -421,7 +421,7 @@ public final class Listener extends ContextLoader implements ServletContextListe
 	 * @param servletContext
 	 */
 	private void clearDWRFile(ServletContext servletContext) {
-		File dwrFile = Paths.get(servletContext.getRealPath(""), "WEB-INF", "dwr-modules.xml").toFile();
+		File dwrFile = Path.of(servletContext.getRealPath(""), "WEB-INF", "dwr-modules.xml").toFile();
 		
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -574,7 +574,7 @@ public final class Listener extends ContextLoader implements ServletContextListe
 	 * @param servletContext the current servlet context for the webapp
 	 */
 	public static void loadBundledModules(ServletContext servletContext) {
-		File folder = Paths.get(servletContext.getRealPath(""), "WEB-INF", "bundledModules").toFile();
+		File folder = Path.of(servletContext.getRealPath(""), "WEB-INF", "bundledModules").toFile();
 		
 		if (!folder.exists()) {
 			log.warn("Bundled module folder doesn't exist: " + folder.getAbsolutePath());

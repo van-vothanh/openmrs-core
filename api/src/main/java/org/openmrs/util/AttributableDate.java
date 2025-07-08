@@ -9,6 +9,7 @@
  */
 package org.openmrs.util;
 
+import java.io.Serial;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,7 +30,8 @@ import org.openmrs.api.context.Context;
  * @see org.openmrs.Attributable
  */
 public class AttributableDate extends Date implements Attributable<AttributableDate> {
-	
+
+	@Serial
 	private static final long serialVersionUID = 4280303636131451746L;
 	
 	private static final String DATE_FORMAT = "yyyy-MM-dd";

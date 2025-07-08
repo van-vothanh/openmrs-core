@@ -9,6 +9,8 @@
  */
 package org.openmrs;
 
+import java.io.Serial;
+
 import org.hibernate.envers.Audited;
 
 /**
@@ -19,6 +21,7 @@ import org.hibernate.envers.Audited;
 @Audited
 public class ReferralOrder extends ServiceOrder {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	/**

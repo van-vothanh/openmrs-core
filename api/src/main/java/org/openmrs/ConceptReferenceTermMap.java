@@ -9,6 +9,8 @@
  */
 package org.openmrs;
 
+import java.io.Serial;
+
 import org.hibernate.envers.Audited;
 
 /**
@@ -20,7 +22,8 @@ import org.hibernate.envers.Audited;
  */
 @Audited
 public class ConceptReferenceTermMap extends BaseConceptMap {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private Integer conceptReferenceTermMapId;

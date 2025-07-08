@@ -18,6 +18,8 @@ import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
+import java.io.Serial;
+
 /**
  * Represents the assortment of visit types available to an implementation. These could include
  * items like "Initial HIV Clinic Visit", "Return TB Clinic Visit", and "Hospitalization".
@@ -28,7 +30,8 @@ import org.hibernate.envers.Audited;
 @Table(name = "visit_type")
 @Audited
 public class VisitType extends BaseChangeableOpenmrsMetadata {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@Id

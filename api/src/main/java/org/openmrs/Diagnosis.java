@@ -33,6 +33,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import java.io.Serial;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -47,7 +48,8 @@ import java.util.Set;
 @Table(name = "encounter_diagnosis")
 @Audited
 public class Diagnosis extends BaseCustomizableData<DiagnosisAttribute> implements FormRecordable {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@Id
