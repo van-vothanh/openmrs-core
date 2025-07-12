@@ -146,6 +146,6 @@ public class ChangeLogVersionFinder {
 			return matcher.group(1) + LOWER_CASE_X;
 		}
 		throw new IllegalArgumentException(
-		        String.format("version string '%s' does not match 'major.minor.' pattern", version));
+			"version string '%s' does not match 'major.minor.' pattern".formatted(version));
 	}
 }

@@ -129,24 +129,23 @@ public class DatatypeServiceImpl extends BaseOpenmrsService implements DatatypeS
 	 * @return the generic type of t or an interface it implements that is a CustomDatatype
 	 */
 	private Class datatypeClassHandled(Type t) {
-		if (t instanceof ParameterizedType) {
-			ParameterizedType pt = (ParameterizedType) t;
+		if (t instanceof ParameterizedType pt) {
 			Type first = pt.getActualTypeArguments()[0];
-			if (first instanceof Class && CustomDatatype.class.isAssignableFrom((Class) first)) {
-				return (Class) first;
+			if (first instanceof Class class1 && CustomDatatype.class.isAssignableFrom(class1)) {
+				return class1;
 			} else {
 				return datatypeClassHandled(pt.getRawType());
 			}
 			
-		} else if (t instanceof Class) {
-			Type genericSuperclass = ((Class) t).getGenericSuperclass();
+		} else if (t instanceof Class class1) {
+			Type genericSuperclass = class1.getGenericSuperclass();
 			if (genericSuperclass != null) {
 				Class ret = datatypeClassHandled(genericSuperclass);
 				if (ret != null) {
 					return ret;
 				}
 			}
-			for (Type candidate : ((Class) t).getGenericInterfaces()) {
+			for (Type candidate : class1.getGenericInterfaces()) {
 				Class ret = datatypeClassHandled(candidate);
 				if (ret != null) {
 					return ret;

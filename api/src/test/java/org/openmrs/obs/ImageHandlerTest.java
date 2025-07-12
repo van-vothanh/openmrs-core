@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
@@ -72,7 +71,7 @@ public class ImageHandlerTest extends BaseContextSensitiveTest {
 	public void saveObs_shouldRetrieveCorrectMimetype() throws IOException {
 		String mimetype = "image/png";
 		String filename = "TestingComplexObsSaving.png";
-		File sourceFile = Paths.get("src", "test", "resources", "ComplexObsTestImage.png").toFile();
+		File sourceFile = Path.of("src", "test", "resources", "ComplexObsTestImage.png").toFile();
 		
 		BufferedImage img = ImageIO.read(sourceFile);
 		
@@ -101,7 +100,7 @@ public class ImageHandlerTest extends BaseContextSensitiveTest {
 	
 	@Test
 	public void saveObs_shouldHandleByteArrays() throws IOException {
-		Path sourceFile = Paths.get("src", "test", "resources", "ComplexObsTestImage.png");
+		Path sourceFile = Path.of("src", "test", "resources", "ComplexObsTestImage.png");
 		
 		byte[] bytes = Files.readAllBytes(sourceFile);
 		ComplexData complexData = new ComplexData("TestingComplexObsSaving.png", bytes);

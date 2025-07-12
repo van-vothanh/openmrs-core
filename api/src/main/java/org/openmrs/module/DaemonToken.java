@@ -9,6 +9,7 @@
  */
 package org.openmrs.module;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import org.openmrs.api.context.Daemon;
@@ -20,7 +21,8 @@ import org.openmrs.api.context.Daemon;
  * @since 1.9.2
  */
 public class DaemonToken implements Serializable {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private final String id;

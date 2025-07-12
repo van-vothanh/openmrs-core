@@ -9,6 +9,8 @@
  */
 package org.openmrs.api;
 
+import java.io.Serial;
+
 /**
  * This exception is thrown when concept is used/attached to an observation.
  * 
@@ -16,7 +18,8 @@ package org.openmrs.api;
  * @since Version 1.7
  */
 public class ConceptInUseException extends APIException {
-	
+
+	@Serial
 	private static final long serialVersionUID = 132352321232223L;
 	
 	/**

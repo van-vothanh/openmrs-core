@@ -134,9 +134,8 @@ public class LoggingAdvice implements MethodInterceptor {
 						username = user.getSystemId();
 					}
 				}
-				log.debug(String.format(
-				    "An error occurred while executing this method.%nCurrent user: %s%nError message: %s", username, e
-				            .getMessage()), e);
+				log.debug("An error occurred while executing this method.%nCurrent user: %s%nError message: %s".formatted(username, e
+					.getMessage()), e);
 			}
 			throw e;
 		}
