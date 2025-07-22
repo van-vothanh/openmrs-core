@@ -18,7 +18,6 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -61,8 +60,8 @@ public class LocalStorageService extends BaseStorageService implements StorageSe
 	
 	public LocalStorageService(@Value("${storage.dir:}") String storageDir, @Autowired StreamDataService streamService) {
 		super(streamService);
-		this.storageDir = StringUtils.isBlank(storageDir) ? Paths.get(OpenmrsUtil.getApplicationDataDirectory(), 
-			"storage").toAbsolutePath() : Paths.get(storageDir).toAbsolutePath();
+		this.storageDir = StringUtils.isBlank(storageDir) ? Path.of(OpenmrsUtil.getApplicationDataDirectory(), 
+			"storage").toAbsolutePath() : Path.of(storageDir).toAbsolutePath();
 	}
 	
 	@Override
@@ -78,7 +77,7 @@ public class LocalStorageService extends BaseStorageService implements StorageSe
 	 * @return the legacy storage dir
 	 */
 	private Path getLegacyStorageDir() {
-		return Paths.get(OpenmrsUtil.getApplicationDataDirectory());
+		return Path.of(OpenmrsUtil.getApplicationDataDirectory());
 	}
 
 	@Override
@@ -124,7 +123,7 @@ public class LocalStorageService extends BaseStorageService implements StorageSe
 		String encodedPrefix = encodeKey(keyPrefix);
 		encodedPrefix = encodedPrefix.replace('/', File.separatorChar);
 		
-		Path pathPrefix = Paths.get(encodedPrefix);
+		Path pathPrefix = Path.of(encodedPrefix);
 		final Path parent;
 		final String filename;
 		if (encodedPrefix.endsWith(File.separator) && Files.isDirectory(storagePath.resolve(pathPrefix))) {
@@ -139,7 +138,7 @@ public class LocalStorageService extends BaseStorageService implements StorageSe
 			dirs.add(parent.toString());
 		}
 		@SuppressWarnings("resource")
-		Stream<Path> stream = Files.list(Paths.get(storageDir.toString(), dirs.toArray(new String[0])));
+		Stream<Path> stream = Files.list(Path.of(storageDir.toString(), dirs.toArray(new String[0])));
 		// Filter out files that start with dot (hidden files)
 		return stream.filter(
 		    path -> path.getFileName().toString().startsWith(filename) && !path.getFileName().toString().startsWith("."))
