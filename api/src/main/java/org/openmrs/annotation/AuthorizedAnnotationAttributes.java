@@ -68,8 +68,7 @@ public class AuthorizedAnnotationAttributes {
 		Set<String> attributes = new HashSet<>();
 		for (Annotation annotation : target.getAnnotations()) {
 			// check for Secured annotations
-			if (annotation instanceof Authorized) {
-				Authorized attr = (Authorized) annotation;
+			if (annotation instanceof Authorized attr) {
 				Collections.addAll(attributes, attr.value());
 				break;
 			}
@@ -88,8 +87,7 @@ public class AuthorizedAnnotationAttributes {
 		
 		for (Annotation annotation : method.getAnnotations()) {
 			// check for Secured annotations
-			if (annotation instanceof Authorized) {
-				Authorized attr = (Authorized) annotation;
+			if (annotation instanceof Authorized attr) {
 				Collections.addAll(attributes, attr.value());
 				break;
 			}
@@ -108,8 +106,7 @@ public class AuthorizedAnnotationAttributes {
 	public boolean getRequireAll(Class<?> target) {
 		for (Annotation annotation : target.getAnnotations()) {
 			// check for Secured annotations
-			if (annotation instanceof Authorized) {
-				Authorized attr = (Authorized) annotation;
+			if (annotation instanceof Authorized attr) {
 				return attr.requireAll();
 			}
 		}
@@ -127,8 +124,7 @@ public class AuthorizedAnnotationAttributes {
 	public boolean getRequireAll(Method method) {
 		for (Annotation annotation : method.getAnnotations()) {
 			// check for Secured annotations
-			if (annotation instanceof Authorized) {
-				Authorized attr = (Authorized) annotation;
+			if (annotation instanceof Authorized attr) {
 				return attr.requireAll();
 			}
 		}

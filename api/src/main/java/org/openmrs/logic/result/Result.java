@@ -9,6 +9,7 @@
  */
 package org.openmrs.logic.result;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,7 +34,8 @@ import org.openmrs.logic.LogicException;
  * TODO: better support/handling of NULL_RESULT
  */
 public class Result extends ArrayList<Result> {
-	
+
+	@Serial
 	private static final long serialVersionUID = -5587574403423820797L;
 	
 	/**

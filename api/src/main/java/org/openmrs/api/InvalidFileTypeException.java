@@ -9,13 +9,16 @@
  */
 package org.openmrs.api;
 
+import java.io.Serial;
+
 /**
  * Exception thrown for situations of an invalid file type  
  * 
  * @see FormService
  */
 public class InvalidFileTypeException extends APIException {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	/**

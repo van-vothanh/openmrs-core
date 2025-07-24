@@ -1977,7 +1977,7 @@ public class HibernateConceptDAO implements ConceptDAO {
 		Join<ConceptName, Concept> conceptJoin = root.join("concept");
 
 		Locale locale = Context.getLocale();
-		Locale language = new Locale(locale.getLanguage() + "%");
+		Locale language = Locale.of(locale.getLanguage() + "%");
 		List<Predicate> predicates = new ArrayList<>();
 
 		predicates.add(cb.or(cb.equal(root.get("locale"), locale), cb.like(root.get("locale").as(String.class), language.toString())));
@@ -2077,7 +2077,7 @@ public class HibernateConceptDAO implements ConceptDAO {
 
 		predicates.add(cb.isFalse(root.get("voided")));
 		predicates.add(cb.or(cb.equal(root.get("locale"), name.getLocale()),
-			cb.equal(root.get("locale"), new Locale(name.getLocale().getLanguage()))));
+			cb.equal(root.get("locale"), Locale.of(name.getLocale().getLanguage()))));
 
 		if (Context.getAdministrationService().isDatabaseStringComparisonCaseSensitive()) {
 			predicates.add(cb.equal(cb.lower(root.get("name")), name.getName().toLowerCase()));
