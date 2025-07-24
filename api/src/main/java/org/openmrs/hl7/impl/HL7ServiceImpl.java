@@ -983,8 +983,8 @@ public class HL7ServiceImpl extends BaseOpenmrsService implements HL7Service {
 		}
 		
 		// save the new person or patient
-		if (person instanceof Patient) {
-			Context.getPatientService().savePatient((Patient) person);
+		if (person instanceof Patient patient) {
+			Context.getPatientService().savePatient(patient);
 		} else {
 			Context.getPersonService().savePerson(person);
 		}

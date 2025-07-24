@@ -9,6 +9,8 @@
  */
 package org.openmrs.customdatatype;
 
+import java.io.Serial;
+
 import org.openmrs.api.APIException;
 
 /**
@@ -17,7 +19,8 @@ import org.openmrs.api.APIException;
  * @since 1.9
  */
 public class InvalidCustomValueException extends APIException {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	/**

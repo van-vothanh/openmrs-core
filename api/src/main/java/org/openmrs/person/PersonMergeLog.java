@@ -9,6 +9,8 @@
  */
 package org.openmrs.person;
 
+import java.io.Serial;
+
 import org.hibernate.envers.Audited;
 import org.openmrs.BaseChangeableOpenmrsData;
 import org.openmrs.Person;
@@ -28,7 +30,8 @@ import org.openmrs.api.PersonService;
  */
 @Audited
 public class PersonMergeLog extends BaseChangeableOpenmrsData {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	/**

@@ -11,6 +11,7 @@ package org.openmrs;
 
 import org.hibernate.envers.Audited;
 
+import java.io.Serial;
 import java.util.Date;
 import java.util.Locale;
 
@@ -19,7 +20,8 @@ import java.util.Locale;
  */
 @Audited
 public class ConceptDescription extends BaseOpenmrsObject implements Auditable, java.io.Serializable {
-	
+
+	@Serial
 	private static final long serialVersionUID = -7223075113369136584L;
 	
 	// Fields

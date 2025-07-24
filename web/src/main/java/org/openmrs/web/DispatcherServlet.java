@@ -13,6 +13,8 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
 import org.openmrs.module.Module;
+
+import java.io.Serial;
 import org.openmrs.module.ModuleFactory;
 import org.openmrs.module.web.WebModuleUtil;
 import org.openmrs.util.DatabaseUpdater;
@@ -33,7 +35,8 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  * @see #reInitFrameworkServlet()
  */
 public class DispatcherServlet extends org.springframework.web.servlet.DispatcherServlet {
-	
+
+	@Serial
 	private static final long serialVersionUID = -6925172744402818729L;
 	
 	private static final Logger log = LoggerFactory.getLogger(DispatcherServlet.class);

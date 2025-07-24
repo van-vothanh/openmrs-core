@@ -118,8 +118,7 @@ public class Reflect {
 	 * <strong>Should</strong> return false for a generic whose bound is not a subclass
 	 */
 	public boolean isSuperClass(Type t) {
-		if (t instanceof TypeVariable<?>) {
-			TypeVariable<?> typeVar = (TypeVariable<?>) t;
+		if (t instanceof TypeVariable<?> typeVar) {
 			if (typeVar.getBounds() == null || typeVar.getBounds().length == 0) {
 				return parametrizedClass.equals(Object.class);
 			}
@@ -129,8 +128,8 @@ public class Reflect {
 				}
 			}
 			return false;
-		} else if (t instanceof Class<?>) {
-			return isSuperClass((Class<?>) t);
+		} else if (t instanceof Class<?> class1) {
+			return isSuperClass(class1);
 		} else {
 			throw new IllegalArgumentException("Don't know how to handle: " + t.getClass());
 		}
@@ -163,8 +162,8 @@ public class Reflect {
 		if (isCollection(field.getType())) {
 			try {
 				ParameterizedType type = (ParameterizedType) field.getGenericType();
-				if (type.getActualTypeArguments()[0] instanceof Class) {
-					return (parametrizedClass.isAssignableFrom((Class) type.getActualTypeArguments()[0]));
+				if (type.getActualTypeArguments()[0] instanceof Class class1) {
+					return (parametrizedClass.isAssignableFrom(class1));
 				} else if (type.getActualTypeArguments()[0] instanceof TypeVariable) {
 					return isSuperClass(type.getActualTypeArguments()[0]);
 				}

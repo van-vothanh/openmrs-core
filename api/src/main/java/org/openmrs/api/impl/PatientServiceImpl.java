@@ -225,8 +225,8 @@ public class PatientServiceImpl extends BaseOpenmrsService implements PatientSer
 			return null;
 		}
 		person = HibernateUtil.getRealObjectFromProxy(person);
-		if (person instanceof Patient) {
-			return (Patient)person;
+		if (person instanceof Patient patient) {
+			return patient;
 		}
 		else {
 			return new Patient(person);
