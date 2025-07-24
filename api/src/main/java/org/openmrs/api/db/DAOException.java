@@ -9,13 +9,16 @@
  */
 package org.openmrs.api.db;
 
+import java.io.Serial;
+
 import org.openmrs.api.APIException;
 
 /**
  * Represents often fatal errors that occur within the database layer.
  */
 public class DAOException extends APIException {
-	
+
+	@Serial
 	private static final long serialVersionUID = -185144340435149253L;
 	
 	public DAOException() {

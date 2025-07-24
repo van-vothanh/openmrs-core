@@ -168,7 +168,7 @@ public class ConceptAttributeTypeValidatorTest extends BaseContextSensitiveTest 
 	}
 	
 	private void assertThatFieldExceedsMaxLength(String field) {
-		assertTrue(errors.hasFieldErrors(field), String.format("Field '%s' has error(s)", field));
+		assertTrue(errors.hasFieldErrors(field), "Field '%s' has error(s)".formatted(field));
 		assertThat(errors.getFieldErrors(field).get(0).getCode(), is("error.exceededMaxLengthOfField"));
 	}
 }

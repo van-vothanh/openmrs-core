@@ -732,8 +732,8 @@ public class EncounterServiceImpl extends BaseOpenmrsService implements Encounte
 				throw new APIException("failed.instantiate.assignment.handler", new Object[] { handlerGlobalValue }, ex);
 			}
 			
-			if (instance instanceof EncounterVisitHandler) {
-				handler = (EncounterVisitHandler) instance;
+			if (instance instanceof EncounterVisitHandler visitHandler) {
+				handler = visitHandler;
 			} else {
 				throw new APIException("assignment.handler.should.implement.EncounterVisitHandler", (Object[]) null);
 			}

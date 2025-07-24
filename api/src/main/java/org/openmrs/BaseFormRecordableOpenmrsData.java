@@ -16,6 +16,8 @@ import org.openmrs.api.APIException;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+import java.io.Serial;
+
 /**
  * Base implementation of FormRecordable that bridges between a saved BaseChangeableOpenmrsData entity and the path in a form where it was recorded.
  * 
@@ -25,6 +27,7 @@ import javax.persistence.MappedSuperclass;
 @Audited
 public abstract class BaseFormRecordableOpenmrsData extends BaseChangeableOpenmrsData implements FormRecordable {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	protected static final String FORM_NAMESPACE_PATH_SEPARATOR = "^";

@@ -18,7 +18,6 @@ import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -131,7 +130,7 @@ public abstract class StartupFilter implements Filter {
 				// strip out the /initfilter part
 				servletPath = servletPath.replaceFirst("/initfilter", "/WEB-INF/view");
 				// writes the actual file path to the response
-				Path filePath = Paths.get(filterConfig.getServletContext().getRealPath(servletPath)).normalize();
+				Path filePath = Path.of(filterConfig.getServletContext().getRealPath(servletPath)).normalize();
 				Path fullFilePath = filePath;
 				
 				if (httpRequest.getPathInfo() != null) {

@@ -17,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import java.io.Serial;
 import java.util.Date;
 
 /**
@@ -31,7 +33,8 @@ import java.util.Date;
 @Entity
 @Table(name = "medication_dispense")
 public class MedicationDispense extends BaseFormRecordableOpenmrsData {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@Id

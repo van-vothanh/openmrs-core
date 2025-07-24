@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import org.openmrs.api.StorageService;
@@ -30,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class BaseStorageService extends BaseOpenmrsService implements StorageService {
 	private final StreamDataService streamService;
 	
-	private final Path tempDir = Paths.get(System.getProperty("java.io.tmpdir"));
+	private final Path tempDir = Path.of(System.getProperty("java.io.tmpdir"));
 	
 	public BaseStorageService(@Autowired StreamDataService streamService) {
 		this.streamService = streamService;
