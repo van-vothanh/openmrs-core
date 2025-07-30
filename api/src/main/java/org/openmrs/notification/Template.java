@@ -9,6 +9,7 @@
  */
 package org.openmrs.notification;
 
+import java.io.Serial;
 import java.util.Map;
 
 import org.hibernate.envers.Audited;
@@ -16,10 +17,11 @@ import org.openmrs.BaseOpenmrsObject;
 
 @Audited
 public class Template extends BaseOpenmrsObject {
-	
+
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -1782906754736853557L;
 	
 	// Persisted

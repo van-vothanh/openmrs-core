@@ -1839,7 +1839,7 @@ public class ConceptServiceTest extends BaseContextSensitiveTest {
 			}
 		}
 		//ensure that the conceptName has actually been found and replaced
-		assertTrue(concept.hasName("new name", new Locale("en", "GB")));
+		assertTrue(concept.hasName("new name", Locale.of("en", "GB")));
 		conceptService.saveConcept(concept);
 		assertTrue(conceptService.getConceptName(1847).getVoided());
 	}
@@ -2133,7 +2133,7 @@ public class ConceptServiceTest extends BaseContextSensitiveTest {
                 .singletonList(Locale.ENGLISH), false, null, null, null, null, null, null, null);
         // "now matches both concept names "TRUST NOW" and "TRUST NOWHERE", but these are for the same concept (4000), so there should only be one item in the result set
         assertEquals(1, searchResults.size());
-        assertEquals(new Integer(4000), searchResults.get(0).getConcept().getId());
+        assertEquals(Integer.valueOf(4000), searchResults.get(0).getConcept().getId());
 	}
 
 	/**
@@ -2556,7 +2556,7 @@ public class ConceptServiceTest extends BaseContextSensitiveTest {
 		//Insert a row to simulate an existing duplicate fully specified/preferred name that needs to be edited
 		executeDataSet("org/openmrs/api/include/ConceptServiceTest-conceptWithDuplicateName.xml");
 		Concept conceptToEdit = conceptService.getConcept(10000);
-		Locale locale = new Locale("en", "GB");
+		Locale locale = Locale.of("en", "GB");
 		conceptToEdit.addDescription(new ConceptDescription("some description",locale));
 		ConceptName duplicateNameToEdit = conceptToEdit.getFullySpecifiedName(locale);
 		//Ensure the name is a duplicate in it's locale
@@ -2652,21 +2652,21 @@ public class ConceptServiceTest extends BaseContextSensitiveTest {
 		//given
 		String name = "Concept";
 		Concept concept1 = new Concept();
-		concept1.addName(new ConceptName(name, new Locale("en", "US")));
+		concept1.addName(new ConceptName(name, Locale.of("en", "US")));
 		concept1.addDescription(new ConceptDescription("some description",null));
 		concept1.setDatatype(new ConceptDatatype(1));
 		concept1.setConceptClass(new ConceptClass(1));
 		Context.getConceptService().saveConcept(concept1);
 		
 		Concept concept2 = new Concept();
-		concept2.addName(new ConceptName(name, new Locale("en", "GB")));
+		concept2.addName(new ConceptName(name, Locale.of("en", "GB")));
 		concept2.addDescription(new ConceptDescription("some description",null));
 		concept2.setDatatype(new ConceptDatatype(1));
 		concept2.setConceptClass(new ConceptClass(1));
 		Context.getConceptService().saveConcept(concept2);
 		
 		Concept concept3 = new Concept();
-		concept3.addName(new ConceptName(name, new Locale("en")));
+		concept3.addName(new ConceptName(name, Locale.of("en")));
 		concept3.addDescription(new ConceptDescription("some description",null));
 		concept3.setDatatype(new ConceptDatatype(1));
 		concept3.setConceptClass(new ConceptClass(1));
@@ -2675,7 +2675,7 @@ public class ConceptServiceTest extends BaseContextSensitiveTest {
 		updateSearchIndex();
 		
 		//when
-		List<Concept> concepts = Context.getConceptService().getConceptsByName(name, new Locale("en"), false);
+		List<Concept> concepts = Context.getConceptService().getConceptsByName(name, Locale.of("en"), false);
 		
 		//then
 		assertEquals(3, concepts.size());
@@ -2691,21 +2691,21 @@ public class ConceptServiceTest extends BaseContextSensitiveTest {
 		//given
 		String name = "Concept";
 		Concept concept1 = new Concept();
-		concept1.addName(new ConceptName(name, new Locale("en", "US")));
+		concept1.addName(new ConceptName(name, Locale.of("en", "US")));
 		concept1.addDescription(new ConceptDescription("some description",null));
 		concept1.setDatatype(new ConceptDatatype(1));
 		concept1.setConceptClass(new ConceptClass(1));
 		Context.getConceptService().saveConcept(concept1);
 		
 		Concept concept2 = new Concept();
-		concept2.addName(new ConceptName(name, new Locale("en", "GB")));
+		concept2.addName(new ConceptName(name, Locale.of("en", "GB")));
 		concept2.addDescription(new ConceptDescription("some description",null));
 		concept2.setDatatype(new ConceptDatatype(1));
 		concept2.setConceptClass(new ConceptClass(1));
 		Context.getConceptService().saveConcept(concept2);
 		
 		Concept concept3 = new Concept();
-		concept3.addName(new ConceptName(name, new Locale("en")));
+		concept3.addName(new ConceptName(name, Locale.of("en")));
 		concept3.addDescription(new ConceptDescription("some description",null));
 		concept3.setDatatype(new ConceptDatatype(1));
 		concept3.setConceptClass(new ConceptClass(1));
@@ -2714,7 +2714,7 @@ public class ConceptServiceTest extends BaseContextSensitiveTest {
 		updateSearchIndex();
 		
 		//when
-		List<Concept> concepts = Context.getConceptService().getConceptsByName(name, new Locale("en", "US"), false);
+		List<Concept> concepts = Context.getConceptService().getConceptsByName(name, Locale.of("en", "US"), false);
 		
 		//then
 		assertThat(concepts.get(0), is(concept1));
@@ -2966,7 +2966,7 @@ public class ConceptServiceTest extends BaseContextSensitiveTest {
 		executeDataSet("org/openmrs/api/include/ConceptServiceTest-names.xml");
 		
 		List<ConceptSearchResult> searchResults = conceptService.getConcepts("SALBUTAMOL INHALER", Collections
-		        .singletonList(new Locale("en", "US")), false, null, null, null, null, null, null, null);
+		        .singletonList(Locale.of("en", "US")), false, null, null, null, null, null, null, null);
 		
 		assertThat(searchResults.get(0).getWord(), is("SALBUTAMOL INHALER"));
 	}
@@ -2980,7 +2980,7 @@ public class ConceptServiceTest extends BaseContextSensitiveTest {
 		conceptService.saveConceptStopWord(new ConceptStopWord("OF", Locale.US));
 		
 		List<ConceptSearchResult> searchResults = conceptService.getConcepts("tuberculosis of knee", Collections
-		        .singletonList(new Locale("en", "US")), false, null, null, null, null, null, null, null);
+		        .singletonList(Locale.of("en", "US")), false, null, null, null, null, null, null, null);
 		
 		assertEquals(1, searchResults.size());
 		assertEquals("Tuberculosis of Knee", searchResults.get(0).getConceptName().getName());
@@ -3218,7 +3218,7 @@ public class ConceptServiceTest extends BaseContextSensitiveTest {
 		cp.setFinalText(cp.getOriginalText());
 		cp.setState(OpenmrsConstants.CONCEPT_PROPOSAL_SYNONYM);
 		Concept mappedConcept = cs.getConcept(5);
-		Locale locale = new Locale("en", "GB");
+		Locale locale = Locale.of("en", "GB");
 		mappedConcept.addDescription(new ConceptDescription("some description",locale));
 		assertTrue(mappedConcept.hasName(cp.getFinalText(), locale));
 		
@@ -3871,21 +3871,21 @@ public class ConceptServiceTest extends BaseContextSensitiveTest {
 		
 		//search phrase with AND
 		List<ConceptSearchResult> searchResults = conceptService.getConcepts("AND SALBUTAMOL INHALER", Collections
-		        .singletonList(new Locale("en", "US")), false, null, null, null, null, null, null, null);
+		        .singletonList(Locale.of("en", "US")), false, null, null, null, null, null, null, null);
 		
 		assertEquals(1, searchResults.size());
 		assertThat(searchResults.get(0).getWord(), is("AND SALBUTAMOL INHALER"));
 		
 		//search phrase with OR
 		searchResults = conceptService.getConcepts("SALBUTAMOL OR INHALER", Collections
-	        .singletonList(new Locale("en", "US")), false, null, null, null, null, null, null, null);
+	        .singletonList(Locale.of("en", "US")), false, null, null, null, null, null, null, null);
 	
 		assertEquals(1, searchResults.size());
 		assertThat(searchResults.get(0).getWord(), is("SALBUTAMOL OR INHALER"));
 		
 		//search phrase with NOT
 		searchResults = conceptService.getConcepts("SALBUTAMOL INHALER NOT", Collections
-	        .singletonList(new Locale("en", "US")), false, null, null, null, null, null, null, null);
+	        .singletonList(Locale.of("en", "US")), false, null, null, null, null, null, null, null);
 	
 		assertEquals(1, searchResults.size());
 		assertThat(searchResults.get(0).getWord(), is("SALBUTAMOL INHALER NOT"));

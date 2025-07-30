@@ -71,13 +71,14 @@ public class ModuleFilterDefinitionTest {
 	 */
 	@Test
 	public void retrieveFilterDefinitions_shouldReturnListOfSizeOneUsingInitParams() {
-		String xmlString = "<?xml version =\"1.0\" encoding=\"UTF-8\"?>\n"
-						 + "<data><filter>\n"
-						 + "	<init-param>\n"
-						 + "		<param-name>test</param-name>\n"
-						 + "		<param-value>123</param-value>\n"
-						 + "	</init-param>\n"
-						 + "</filter></data>";
+		String xmlString = """
+						 <?xml version ="1.0" encoding="UTF-8"?>
+						 <data><filter>
+						 	<init-param>
+						 		<param-name>test</param-name>
+						 		<param-value>123</param-value>
+						 	</init-param>
+						 </filter></data>""";
 		Module module = new Module("test");
 		module.setConfig(getDocument(xmlString));
 		
@@ -92,11 +93,12 @@ public class ModuleFilterDefinitionTest {
 	 */
 	@Test
 	public void retrieveFilterDefinitions_shouldReturnListOfSizeOneUsingFilterNameAndClass() {
-		String xmlString = "<?xml version =\"1.0\" encoding=\"UTF-8\"?>\n"
-						 + "<data><filter>\n"
-						 + "	<filter-name>test</filter-name>\n"
-						 + "	<filter-class>123</filter-class>\n"
-						 + "</filter></data>";
+		String xmlString = """
+						 <?xml version ="1.0" encoding="UTF-8"?>
+						 <data><filter>
+						 	<filter-name>test</filter-name>
+						 	<filter-class>123</filter-class>
+						 </filter></data>""";
 		Module module = new Module("test");
 		module.setConfig(getDocument(xmlString));
 		

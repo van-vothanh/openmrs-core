@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -43,13 +43,19 @@ public abstract class AbstractSnapshotTuner {
 	
 	private static final Logger log = LoggerFactory.getLogger(AbstractSnapshotTuner.class);
 	
-	private static final String OPENMRS_LICENSE_HEADER = "<!--\n" + "\n"
-		+ "    This Source Code Form is subject to the terms of the Mozilla Public License,\n"
-		+ "    v. 2.0. If a copy of the MPL was not distributed with this file, You can\n"
-		+ "    obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under\n"
-		+ "    the terms of the Healthcare Disclaimer located at http://openmrs.org/license.\n" + "\n"
-		+ "    Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS\n"
-		+ "    graphic logo is a trademark of OpenMRS Inc.\n" + "\n" + "-->\n";
+	private static final String OPENMRS_LICENSE_HEADER = """
+		<!--
+		
+		    This Source Code Form is subject to the terms of the Mozilla Public License,
+		    v. 2.0. If a copy of the MPL was not distributed with this file, You can
+		    obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+		    the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+		
+		    Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+		    graphic logo is a trademark of OpenMRS Inc.
+		
+		-->
+		""";
 	
 	private static final String OPENMRS_LICENSE_SNIPPET = "the terms of the Healthcare Disclaimer located at http://openmrs.org/license";
 	
@@ -111,7 +117,7 @@ public abstract class AbstractSnapshotTuner {
 	}
 	
 	void deleteFile(String path) {
-		File file = Paths.get(path).toFile();
+		File file = Path.of(path).toFile();
 		if (file.exists() && file.isFile()) {
 			log.info("Deleting updated file from previous run: '{}'...", path);
 			file.delete();
@@ -134,7 +140,7 @@ public abstract class AbstractSnapshotTuner {
 	}
 	
 	static Document readChangeLogFile(String path) throws DocumentException, SAXException {
-		File file = Paths.get(path).toFile();
+		File file = Path.of(path).toFile();
 		if (!file.exists()) {
 			log.error("The source file '{}' does not exist. Please generate both Liquibase changelog files and retry. "
 					+ "Please check if you are running this program from the 'openmrs-core/liquibase' folder.",
@@ -220,7 +226,7 @@ public abstract class AbstractSnapshotTuner {
 	}
 	
 	void writeFile(String content, String path) throws IOException {
-		File file = Paths.get(path).toFile();
+		File file = Path.of(path).toFile();
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
 			writer.write(content);
 		}

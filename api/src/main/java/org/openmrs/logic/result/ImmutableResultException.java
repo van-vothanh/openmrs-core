@@ -9,13 +9,16 @@
  */
 package org.openmrs.logic.result;
 
+import java.io.Serial;
+
 import org.openmrs.api.APIException;
 
 /**
  * 
  */
 public class ImmutableResultException extends APIException {
-	
+
+	@Serial
 	private static final long serialVersionUID = 7182777087671695215L;
 	
 	public ImmutableResultException() {

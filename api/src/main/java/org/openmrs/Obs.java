@@ -984,8 +984,7 @@ public class Obs extends BaseFormRecordableOpenmrsData {
 					return "";
 				} else {
 					Concept deproxiedConcept = HibernateUtil.getRealObjectFromProxy(getConcept());
-					if (deproxiedConcept instanceof ConceptNumeric) {
-						ConceptNumeric cn = (ConceptNumeric) deproxiedConcept;
+					if (deproxiedConcept instanceof ConceptNumeric cn) {
 						if (!cn.getAllowDecimal()) {
 							double d = getValueNumeric();
 							int i = (int) d;

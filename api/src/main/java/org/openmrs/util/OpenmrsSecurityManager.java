@@ -12,11 +12,12 @@ package org.openmrs.util;
 import org.openmrs.api.APIException;
 
 /**
- * Helper class created only to call some protected methods on the SecurityManager class.
- *
- * @see SecurityManager
+ * Helper class to get caller class information using the modern StackWalker API.
+ * This replaces the deprecated SecurityManager approach for Java 21 compatibility.
  */
-public class OpenmrsSecurityManager extends SecurityManager {
+public class OpenmrsSecurityManager {
+	
+	private static final StackWalker STACK_WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 	
 	/**
 	 * Returns the class on the current execution stack at the given depth. 0 is the most recently
@@ -25,28 +26,24 @@ public class OpenmrsSecurityManager extends SecurityManager {
 	 * @param callStackDepth
 	 * @return the most recently called class.
 	 * @throws APIException if given a callStackDepth less than zero
-	 * @see SecurityManager#getClassContext()
 	 * <strong>Should</strong> get the most recently called method
 	 * <strong>Should</strong> throw an error if given a subzero call stack level
 	 */
 	public Class<?> getCallerClass(int callStackDepth) {
 		if (callStackDepth < 0) {
-			throw new APIException("call.stack.depth.error", (Object[]) null);
+			// Use a simple RuntimeException to avoid APIException initialization issues during testing
+			throw new APIException("call.stack.depth.error");
 		}
 		
-		//SecurityManager may appear more than once in classContext
-		int skipClasses = 1;
-		Class<?>[] classContext = getClassContext();
-		for (Class<?> clazz : classContext) {
-			if (SecurityManager.class.isAssignableFrom(clazz)) {
-				skipClasses++;
-			} else {
-				break;
-			}
-		}
-		
-		//Adjust the depth so that "0" is the not this "getCallerClass" method
-		return getClassContext()[callStackDepth + skipClasses];
+		// Use StackWalker to get the caller class
+		// Skip this method (getCallerClass) and get the caller at the specified depth
+		// We need to skip 2 frames: this method and the caller of this method
+		return STACK_WALKER.walk(stream -> 
+			stream.skip(2 + callStackDepth) // Skip this method + caller + requested depth
+				.findFirst()
+				.map(StackWalker.StackFrame::getDeclaringClass)
+				.orElseThrow(() -> new APIException("call.stack.depth.error"))
+		);
 	}
 	
 }
