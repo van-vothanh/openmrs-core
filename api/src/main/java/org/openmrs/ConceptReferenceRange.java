@@ -22,6 +22,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import java.io.Serial;
+
 /**
  * A concept reference range defines the acceptable numeric values/ranges of a {@link ConceptNumeric} for specific factors
  * such as age, gender, e.t.c.
@@ -37,7 +39,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "concept_reference_range")
 public class ConceptReferenceRange extends BaseReferenceRange implements OpenmrsObject {
-	
+
+	@Serial
 	private static final long serialVersionUID = 47329L;
 
 	@DocumentId

@@ -17,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -35,6 +37,7 @@ import java.io.Serializable;
 @Table(name = "provider_role")
 public class ProviderRole extends BaseOpenmrsMetadata implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@Id

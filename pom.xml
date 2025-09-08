@@ -597,9 +597,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.14.0</version>
 					<configuration>
-						<target>${javaCompilerVersion}</target>
-						<source>${javaCompilerVersion}</source>
 						<encoding>UTF-8</encoding>
+      <release>21</release>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -1231,7 +1230,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javaCompilerVersion>1.8</javaCompilerVersion>
+		<javaCompilerVersion>21</javaCompilerVersion>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		<TIMESTAMP>${maven.build.timestamp}</TIMESTAMP>
 

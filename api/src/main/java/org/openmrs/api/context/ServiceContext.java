@@ -760,8 +760,8 @@ public class ServiceContext implements ApplicationContextAware {
 		
 		if (classString == null || classInstance == null) {
 			throw new APIException(
-			        String.format("Unable to find service as unexpected null value found for class [%s] or instance [%s]",
-			            classString, classInstance));
+				"Unable to find service as unexpected null value found for class [%s] or instance [%s]".formatted(
+					classString, classInstance));
 		}
 		
 		Class cls = null;
