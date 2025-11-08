@@ -1231,7 +1231,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javaCompilerVersion>1.8</javaCompilerVersion>
+		<javaCompilerVersion>21</javaCompilerVersion>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		<TIMESTAMP>${maven.build.timestamp}</TIMESTAMP>
 
@@ -1270,6 +1270,6 @@
 		<sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>
 		<sonar.analysis.mode>publish</sonar.analysis.mode>
 
-		<argLine>-Duser.language=en -Duser.region=US -Xmx1g ${customArgLineForTesting} -Djava.locale.providers=COMPAT</argLine>
+		<argLine>-Duser.language=en -Duser.region=US -Xmx1g ${customArgLineForTesting} -Djava.locale.providers=COMPAT -XX:+EnableDynamicAgentLoading</argLine>
 	</properties>
 </project>
